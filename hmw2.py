@@ -1,5 +1,4 @@
-import os
-
+#Adam Teehan - 16318274 - April 2019
 n = 0
 G = 0
 s = ''
