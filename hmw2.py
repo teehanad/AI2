@@ -29,8 +29,13 @@ def main():
     while float(G) >= 1 or float(G) <= 0:
         G = input("Try Again: ")
 
-    print (q(n, s, 'Exercise'))
-    print (q(n, s, 'Relax'))
+    i = 0
+    print("The program isn't frozen its just a little slow as in order to print asnwers in order from 0 to n it calculates all previous answers for each iteration n times")
+    print("It will print finished when done")
+    while i <= n:
+        print ("For n = " +str(i)+ "and G = " +str(G)+ "Exercise = "+str(q(i, s, 'Exercise'))+" "+"Relax = "+  str(q(i, s, 'Relax')))
+        i+= 1
+    print('Finished')
 
 
 
