@@ -13,21 +13,25 @@ rrelax = [[10,10,0],[5,5,0],[0,0,0]]
 
 
 def main():
+    #Take in n value and repeat until it is is of correct format
     global n 
     n = int(raw_input("Enter a value for n >= 0: "))
     while (int(n) < 0):
         n=int(raw_input("Try Again: "))
 
+    #Take in s value and repeat until it is is of correct format
     global s
     s = str(raw_input("Enter a state: (fit, unfit, dead): "))
     while not ((s == 'fit') or (s == 'unfit') or (s == 'dead')):
         s = str(raw_input("Try Again: "))
 
+    #Take in G value and repeat until it is is of correct format
     global G
     G = float(raw_input("Enter a value for G where 0<G<1: "))
     while float(G) >= 1 or float(G) <= 0:
         G = float(raw_input("Try Again: "))
 
+    #Print a wait message while the loops runs ans calculates answers
     i = 0
     print("------------------------------------------------------------------(Calculating values from 0 to "+str(n)+"...)""-----------------------------------------------------------------")
     while i <= n:
@@ -37,8 +41,8 @@ def main():
 
 
 
-
-
+#Functions below are recusivly called using the n value passed in 
+#Probability function, indexes into a 2d array based on the Current state, action and Desired next state (s, a, s')
 def p(s,a,sDash):
     global pexercise
     global prelax
@@ -58,8 +62,9 @@ def p(s,a,sDash):
         return pexercise[i][j]
     else:
         return prelax[i][j]
-        
 
+
+#Reward function, like above indexes into a 2d array based on the Current state, action and Desired next state (s, a, s')
 def r(s,a,sDash):
     global rexercise
     global rrelax
@@ -79,11 +84,12 @@ def r(s,a,sDash):
     else:
         return rrelax[i][j]
 
+#Discounted Gamma value function from assignmemt sheet with n for recusrsion
 def V(n,s):
     return max(q(n,s, 'exercise'), q(n,s, 'relax'))
         
 
-
+#Esentially the qn+1 function from assignemmt sheet with n for recusrsive calls
 def q(n,s,a):
     if n == 0:
         return q0(s,a)
@@ -92,7 +98,7 @@ def q(n,s,a):
         return q0(s,a) + ((G)*(p(s,a,'fit') * V(n-1,'fit') + p(s,a,'unfit') * V(n-1,'unfit')))
 
 
-
+#q0 function from assignment sheet
 def q0(s,a):
    return (p(s,a,'fit') * r(s,a,'fit')) + (p(s,a,'unfit') * r(s,a,'unfit'))
 
