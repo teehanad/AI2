@@ -4,7 +4,7 @@ n = 0
 G = 0
 s = ''
 pExercise = [[0.891, 0.009, 0.1], [0.18, 0.77, 0.1], [0, 0, 1]]
-rExercixe = [[8,8,0],[0,0,0],[0,0,0]]
+rExercise = [[8,8,0],[0,0,0],[0,0,0]]
 pRelax = [[0.693, 0.297, 0.01], [0, 0.99, 0.01], [0,0,1]]
 rRelax = [[10,10,0],[5,5,0],[0,0,0]]
 
@@ -29,29 +29,69 @@ def main():
     while float(G) >= 1 or float(G) <= 0:
         G = input("Try Again: ")
 
+    print (q(n, s, 'Exercise'))
+    print (q(n, s, 'Relax'))
 
-def p(s,a,s'):
+
+
+
+
+def p(s,a,sDash):
+    global pExercise
+    global pRelax
+
     i = j = 0
     if (s == "Unfit"):
         i = 1
     elif (s == "Dead"):
         i = 2
+    
+    if (sDash == "Unfit"):
+        j = 1
+    elif (sDash == "Dead"):
+        j = 2
+    
+    if(a == "Exercise"):
+        return pExercise[i][j]
+    else:
+        return pRelax[i][j]
+        
 
+def r(s,a,sDash):
+    global rExercise
+    global rRelax
+    i = j = 0
+    if (s == "Unfit"):
+        i = 1
+    elif (s == "Dead"):
+        i = 2
+    
+    if (sDash == "Unfit"):
+        j = 1
+    elif (sDash == "Dead"):
+        j = 2
+    
+    if(a == "Relax"):
+        return rRelax[i][j]
+    else:
+        return rExercise[i][j]
 
+def V(n,s):
+    return max(q(n,s, 'Exercise'), q(n,s, 'Relax'))
         
 
 
-def r():
+def q(n,s,a):
+    if n == 0:
+        return q0(s,a)
+    
+    else:
+        return q0(s,a) + ((G)*(p(s,a,'Fit') * V(n-1,'Fit') + p(s,a,'Unfit') * V(n-1,'Unfit')))
 
-def q():
-
-
-def V():
-    return max( q(n,s,'exercise'), q(n,s,'relax') )
 
 
 def q0(s,a):
-    p(s,a,fit)r(s,a,fit)+p(s,a,unfit)r(s,a,unfit)
+   return (p(s,a,'Fit') * r(s,a,'Fit')) + (p(s,a,'Unfit') * r(s,a,'Unfit'))
 
 
     
