@@ -14,22 +14,22 @@ rRelax = [[10,10,0],[5,5,0],[0,0,0]]
 
 def main():
     global n 
-    n = input("Enter a value for n >= 0: ")
+    n = int(raw_input("Enter a value for n >= 0: "))
     while (int(n) < 0):
-        n=input("Try Again: ")
+        n=int(raw_input("Try Again: "))
 
     global s
-    s = input("Enter a state: (Fit, Unfit, Dead): ")
+    s = str(raw_input("Enter a state: (Fit, Unfit, Dead): "))
     while not ((s == 'Fit') or (s == 'Unfit') or (s == 'Dead')):
-        s = input("Try Again: ")
+        s = str(raw_input("Try Again: "))
 
     global G
-    G = input("Enter a value for G where 0<G<1: ")
+    G = float(raw_input("Enter a value for G where 0<G<1: "))
     while float(G) >= 1 or float(G) <= 0:
-        G = input("Try Again: ")
+        G = float(raw_input("Try Again: "))
 
     i = 0
-    print("-------------------------------------------------------------------(Calculating values from 0 to "+str(n)+"...)""-----------------------------------------------------------------")
+    print("------------------------------------------------------------------(Calculating values from 0 to "+str(n)+"...)""-----------------------------------------------------------------")
     while i <= n:
         print ("For n = " +str(i)+ " & G = " +str(G)+ " Exercise = "+str(q(i, s, 'Exercise'))+" "+"Relax = "+  str(q(i, s, 'Relax')))
         i+= 1
